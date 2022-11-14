@@ -1,6 +1,8 @@
-# vue-project
+# timekeeper (green edition)
 
-This template should help get you started developing with Vue 3 in Vite.
+Initiated with vue-project template, see also:
+
+- [create-vue -> The recommended way to start a Vite-powered Vue project](https://github.com/vuejs/create-vue)
 
 ## Recommended IDE Setup
 
