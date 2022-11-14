@@ -1,6 +1,13 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>
+      For more information refer to this
+      <a
+        href="https://github.com/jackyscript/timekeeper-green-edition"
+        target="_blank"
+        >link</a
+      >
+    </h1>
   </div>
 </template>
 

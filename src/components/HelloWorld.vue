@@ -12,8 +12,8 @@ defineProps<{
     <h3>
       A sample timekeeper application using
       <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
-      How can I help you?
+      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>. How
+      can I help you?
     </h3>
   </div>
 </template>
