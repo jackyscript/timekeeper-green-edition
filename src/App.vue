@@ -14,7 +14,7 @@ import HelloWorld from "./components/HelloWorld.vue";
     />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld title="Timekeeper" type="green edition" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
