@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
+import Introduction from "./components/TheIntroduction.vue";
 </script>
 
 <template>
@@ -14,7 +14,7 @@ import HelloWorld from "./components/HelloWorld.vue";
     />
 
     <div class="wrapper">
-      <HelloWorld title="Timekeeper" type="green edition" />
+      <Introduction title="Timekeeper" type="green edition" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
