@@ -1,4 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+
+const entryDate = ref<HTMLInputElement>();
+
+onMounted(() => {
+  entryDate.value!.valueAsDate = new Date();
+});
+</script>
 
 <template>
   <div class="timekeeper">
@@ -12,7 +20,12 @@
     </select>
 
     <label for="current-day">Current day:</label>
-    <input type="date" id="current-day" name="timekeeper-start" />
+    <input
+      type="date"
+      id="current-day"
+      name="timekeeper-start"
+      ref="entryDate"
+    />
   </div>
 </template>
 
