@@ -3,7 +3,7 @@ import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import TheIntroduction from "../TheIntroduction.vue";
 
-describe("HelloWorld", () => {
+describe("TheIntroduction", () => {
   it("renders properly", () => {
     const wrapper = mount(TheIntroduction, {
       props: { title: "Timekeeper", type: "green edition" },
