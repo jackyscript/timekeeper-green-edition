@@ -5,11 +5,3 @@ import TheTimekeeper from "../components/TheTimeKeeper.vue";
 <template>
   <TheTimekeeper />
 </template>
-
-<style>
-.timekeeper {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-}
-</style>
