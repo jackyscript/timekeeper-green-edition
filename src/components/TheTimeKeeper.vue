@@ -4,7 +4,7 @@ import { ref, onMounted } from "vue";
 const entryDate = ref<HTMLInputElement>();
 
 onMounted(() => {
-  entryDate.value!.valueAsDate = new Date();
+  if (entryDate.value) entryDate.value.valueAsDate = new Date();
 });
 </script>
 
