@@ -1,70 +1,18 @@
 <script setup lang="ts">
-import { onMounted, ref, type Ref } from "vue";
+import { ref } from "vue";
+import { setupTime } from "./time.js";
 
 const entryDate = ref<HTMLInputElement>();
 const beginTime = ref<HTMLInputElement>();
 const endTime = ref<HTMLInputElement>();
 
-let onMount = function (): void {
-  const currentDate = new Date();
+const currentDate = new Date();
 
-  let currentTime = currentDate.toISOString().substring(11, 16);
+let currentTime = currentDate.toISOString().substring(11, 16);
 
-  type supportedTimeValue = string | Date;
-
-  function isSupportedTimeValue(
-    timeValue: supportedTimeValue
-  ): timeValue is supportedTimeValue {
-    return typeof timeValue === "string" || timeValue instanceof Date;
-  }
-
-  function setTime(
-    timeRef: Ref<HTMLInputElement | undefined>,
-    timeValue: string | Date
-  ): void {
-    if (typeof timeRef !== "undefined") {
-      setupTimeElement(timeRef, timeValue);
-    } else {
-      console.error(
-        "During time initialization an error occured: The given HTMLInputTimeElement is undefined"
-      );
-    }
-  }
-
-  function setTimeValue(
-    timeElement: HTMLInputElement,
-    timeValue: supportedTimeValue
-  ): void {
-    if (typeof timeValue === "string") {
-      timeElement.value = timeValue;
-    } else if (timeValue instanceof Date) {
-      timeElement.valueAsDate = timeValue;
-    } else {
-      console.error(
-        "During time initialization an error occured: timeValue has illegal type " +
-          typeof timeValue
-      );
-    }
-  }
-
-  function setupTimeElement(
-    timeRef: Ref<HTMLInputElement | undefined>,
-    timeValue: supportedTimeValue
-  ) {
-    const timeElement = timeRef.value;
-    if (timeElement && isSupportedTimeValue(timeValue)) {
-      setTimeValue(timeElement, timeValue);
-    }
-  }
-
-  setTime(entryDate, currentDate);
-  setTime(beginTime, currentTime);
-  setTime(endTime, currentTime);
-};
-
-onMounted(() => {
-  onMount();
-});
+setupTime(entryDate, currentDate);
+setupTime(beginTime, currentTime);
+setupTime(endTime, currentTime);
 </script>
 
 <template>
