@@ -1,4 +1,4 @@
-import { onMounted, type Ref } from "vue";
+import type { Ref } from "vue";
 
 type supportedTimeValue = string | Date;
 
@@ -6,7 +6,6 @@ export function setupTime(
   timeElement: Ref<HTMLInputElement | undefined>,
   timeData: supportedTimeValue
 ) {
-  const onMount = function (): void {
     function isSupportedTimeValue(
       timeValue: supportedTimeValue
     ): timeValue is supportedTimeValue {
@@ -53,9 +52,5 @@ export function setupTime(
     }
 
     setTime(timeElement, timeData);
-  };
 
-  onMounted(() => {
-    onMount();
-  });
 }

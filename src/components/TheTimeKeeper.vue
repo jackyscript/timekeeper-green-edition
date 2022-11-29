@@ -1,18 +1,21 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref, type Ref } from "vue";
 import { setupTime } from "./time.js";
 
 const entryDate = ref<HTMLInputElement>();
 const beginTime = ref<HTMLInputElement>();
 const endTime = ref<HTMLInputElement>();
+const activityDescription = ref("");
 
-const currentDate = new Date();
+const currentDate: Date = new Date();
 
-let currentTime = currentDate.toISOString().substring(11, 16);
+let currentTime: string = currentDate.toISOString().substring(11, 16);
 
-setupTime(entryDate, currentDate);
-setupTime(beginTime, currentTime);
-setupTime(endTime, currentTime);
+onMounted(() => {
+  setupTime(entryDate, currentDate);
+  setupTime(beginTime, currentTime);
+  setupTime(endTime, currentTime);
+});
 </script>
 
 <template>
@@ -27,6 +30,7 @@ setupTime(endTime, currentTime);
 
     <label for="current-day">On which day:</label>
     <input type="date" id="current-day" name="timekeeper-day" ref="entryDate" />
+    <p>Current day is: {{ entryDate?.value }}</p>
 
     <label for="start-time">When did you start?</label>
     <input
@@ -35,9 +39,11 @@ setupTime(endTime, currentTime);
       name="timekeeper-start"
       ref="beginTime"
     />
+    <p>Start time is: {{ beginTime?.value }}</p>
 
     <label for="end-time">When did you finish?</label>
     <input type="time" id="end-time" name="timekeeper-end" ref="endTime" />
+    <p>End time is: {{ endTime?.value }}</p>
 
     <label for="notes">Tell me more about your activity:</label>
     <textarea
@@ -46,7 +52,10 @@ setupTime(endTime, currentTime);
       rows="20"
       placeholder="Learned something new, did some exercise, read a chapter in a new book, cooked my favourite meal..."
       maxlength="1000"
+      v-model="activityDescription"
     ></textarea>
+    
+    <p>My activity was: {{ activityDescription }}</p>
   </div>
 </template>
 
