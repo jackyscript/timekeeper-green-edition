@@ -1,21 +1,19 @@
 <script setup lang="ts">
-import { onMounted, ref, type Ref } from "vue";
-import { setupTime } from "./time.js";
+import { ref } from "vue";
 
-const entryDate = ref<HTMLInputElement>();
-const beginTime = ref<HTMLInputElement>();
-const endTime = ref<HTMLInputElement>();
+const entryDate = ref("");
+const beginTime = ref("");
+const endTime = ref("");
 const activityDescription = ref("");
 
 const currentDate: Date = new Date();
+const currentDay: string = currentDate.toISOString().substring(0, 10);
+const currentTime: string = currentDate.toISOString().substring(11, 16);
 
-let currentTime: string = currentDate.toISOString().substring(11, 16);
+entryDate.value = currentDay;
+beginTime.value = currentTime;
+endTime.value = currentTime;
 
-onMounted(() => {
-  setupTime(entryDate, currentDate);
-  setupTime(beginTime, currentTime);
-  setupTime(endTime, currentTime);
-});
 </script>
 
 <template>
@@ -29,21 +27,21 @@ onMounted(() => {
     </select>
 
     <label for="current-day">On which day:</label>
-    <input type="date" id="current-day" name="timekeeper-day" ref="entryDate" />
-    <p>Current day is: {{ entryDate?.value }}</p>
+    <input type="date" id="current-day" name="timekeeper-day" v-model="entryDate" />
+    <p>Current day is: {{ entryDate == undefined ? currentDay : entryDate }}</p>
 
     <label for="start-time">When did you start?</label>
     <input
       type="time"
       id="start-time"
       name="timekeeper-start"
-      ref="beginTime"
+      v-model="beginTime"
     />
-    <p>Start time is: {{ beginTime?.value }}</p>
+    <p>Start time is: {{ beginTime == undefined ? currentTime : beginTime }}</p>
 
     <label for="end-time">When did you finish?</label>
-    <input type="time" id="end-time" name="timekeeper-end" ref="endTime" />
-    <p>End time is: {{ endTime?.value }}</p>
+    <input type="time" id="end-time" name="timekeeper-end" v-model="endTime" />
+    <p>End time is: {{ endTime == undefined ? currentTime : endTime }}</p>
 
     <label for="notes">Tell me more about your activity:</label>
     <textarea
