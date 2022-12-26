@@ -13,11 +13,11 @@ defineProps(["timeRecords"])
   </div>
   <div class="summary-table">
     <div class="timekeeper-entry" v-for="record in timeRecords" title="Click to edit this record">
-      <div>{{ record.value.activityType }}</div>
-      <div>{{ record.value.entryDate }}</div>
-      <div>{{ record.value.beginTime }}</div>
-      <div>{{ record.value.endTime }}</div>
-      <div>{{ record.value.activityDescription }}</div>
+      <div>{{ record.activityType }}</div>
+      <div>{{ record.entryDate }}</div>
+      <div>{{ record.beginTime }}</div>
+      <div>{{ record.endTime }}</div>
+      <div>{{ record.activityDescription }}</div>
     </div>
   </div>
 </template>

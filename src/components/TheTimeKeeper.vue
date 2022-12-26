@@ -20,15 +20,14 @@ const timeRecords: Ref<any> = ref([
 ])
 
 function addTimeRecord() {
-  let currentRecord = ref(
+  let currentRecord = 
     {
-      entryDate: entryDate,
-      beginTime: beginTime,
-      endTime: endTime,
-      activityType: activityType,
-      activityDescription: activityDescription
+      entryDate: entryDate.value,
+      beginTime: beginTime.value,
+      endTime: endTime.value,
+      activityType: activityType.value,
+      activityDescription: activityDescription.value
     }
-  )
   timeRecords.value.push(currentRecord)
 }
 </script>
