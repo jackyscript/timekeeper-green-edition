@@ -1,12 +1,20 @@
 <script setup lang="ts">
-import { ref, type Ref } from "vue";
+import { ref, nextTick, type Ref } from "vue";
 import TimeRecords from "./TimeRecords.vue"
+import { v4 as uuid } from 'uuid'
 
-const entryDate = ref("");
-const beginTime = ref("");
-const endTime = ref("");
-const activityType = ref("");
-const activityDescription = ref("");
+const defaultTitle = "Welcome back, tell me about your day!";
+const editTitle = "Forgot something?";
+let formTitle = ref("");
+formTitle.value = defaultTitle;
+
+let entryDate = ref("");
+let beginTime = ref("");
+let endTime = ref("");
+let activityType = ref("");
+let activityDescription = ref("");
+
+let activeRecord: string = "";
 
 const currentDate: Date = new Date();
 const currentDay: string = currentDate.toISOString().substring(0, 10);
@@ -16,29 +24,51 @@ entryDate.value = currentDay;
 beginTime.value = currentTime;
 endTime.value = currentTime;
 
-const timeRecords: Ref<any> = ref([
-])
+const timeRecords: Ref = ref({})
 
-function addTimeRecord() {
-  let currentRecord = 
-    {
-      entryDate: entryDate.value,
-      beginTime: beginTime.value,
-      endTime: endTime.value,
-      activityType: activityType.value,
-      activityDescription: activityDescription.value
-    }
-  timeRecords.value.push(currentRecord)
+function setTimeRecord() {
+
+  let id: string = activeRecord === "" ? uuid() : activeRecord;
+
+  let currentRecord = {
+    entryDate: entryDate.value,
+    beginTime: beginTime.value,
+    endTime: endTime.value,
+    activityType: activityType.value,
+    activityDescription: activityDescription.value
+  }
+
+  timeRecords.value[id] = currentRecord
+  activeRecord = "";
+
+  formTitle.value = defaultTitle;
+
 }
+
+function selectRecord(key: string) {
+
+  activeRecord = key;
+
+  (function setRecordToForm(timeRecord: any) {
+    beginTime.value = timeRecord.beginTime;
+    endTime.value = timeRecord.endTime;
+    entryDate.value = timeRecord.entryDate;
+    activityType.value = timeRecord.activityType;
+    activityDescription.value = timeRecord.activityDescription;
+  })(timeRecords.value[activeRecord]);
+
+  formTitle.value = editTitle;
+}
+
 </script>
 
 <template>
   <div class="flex-container">
     <div class="flex-item">
-      <button title="Save this!" @click="addTimeRecord">💾</button>
+      <button title="Save this!" @click="setTimeRecord">💾</button>
     </div>
   </div>
-  <h1>Welcome back, tell me about your day!</h1>
+  <h1>{{ formTitle }}</h1>
   <div class="timekeeper">
     <label for="activities">What did you do?</label>
     <select name="activities" id="activities" v-model="activityType">
@@ -62,7 +92,7 @@ function addTimeRecord() {
       maxlength="1000" v-model="activityDescription"></textarea>
   </div>
 
-  <TimeRecords :timeRecords="timeRecords"></TimeRecords>
+  <TimeRecords :timeRecords="timeRecords" @select-record="selectRecord" />
 
 </template>
 

@@ -12,7 +12,7 @@ defineProps(["timeRecords"])
     <div>Description</div>
   </div>
   <div class="summary-table">
-    <div class="timekeeper-entry" v-for="record in timeRecords" title="Click to edit this record">
+    <div class="timekeeper-entry" v-for="(record, key) in timeRecords" title="Click to edit this record" @click="$emit('selectRecord', key)">
       <div>{{ record.activityType }}</div>
       <div>{{ record.entryDate }}</div>
       <div>{{ record.beginTime }}</div>
