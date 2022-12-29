@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps(["timeRecords"])
+defineProps(["timeRecords"]);
 </script>
 
 <template>
@@ -12,7 +12,13 @@ defineProps(["timeRecords"])
     <div>Description</div>
   </div>
   <div class="summary-table">
-    <div class="timekeeper-entry" v-for="(record, key) in timeRecords" title="Click to edit this record" @click="$emit('selectRecord', key)">
+    <div
+      class="timekeeper-entry"
+      v-for="(record, key) in timeRecords"
+      title="Click to edit this record"
+      @click="$emit('selectRecord', key)"
+      :key="record.id"
+    >
       <div>{{ record.activityType }}</div>
       <div>{{ record.entryDate }}</div>
       <div>{{ record.beginTime }}</div>
@@ -36,7 +42,7 @@ defineProps(["timeRecords"])
 }
 
 .timekeeper-entry:nth-child(odd) {
-    background-color: gainsboro;
+  background-color: gainsboro;
 }
 
 .timekeeper-entry {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, nextTick, type Ref } from "vue";
-import TimeRecords from "./TimeRecords.vue"
-import { v4 as uuid } from 'uuid'
+import { ref, type Ref } from "vue";
+import TimeRecords from "./TimeRecords.vue";
+import { v4 as uuid } from "uuid";
 
 const defaultTitle = "Welcome back, tell me about your day!";
 const editTitle = "Forgot something?";
@@ -24,10 +24,9 @@ entryDate.value = currentDay;
 beginTime.value = currentTime;
 endTime.value = currentTime;
 
-const timeRecords: Ref = ref({})
+const timeRecords: Ref = ref({});
 
 function setTimeRecord() {
-
   let id: string = activeRecord === "" ? uuid() : activeRecord;
 
   let currentRecord = {
@@ -35,18 +34,16 @@ function setTimeRecord() {
     beginTime: beginTime.value,
     endTime: endTime.value,
     activityType: activityType.value,
-    activityDescription: activityDescription.value
-  }
+    activityDescription: activityDescription.value,
+  };
 
-  timeRecords.value[id] = currentRecord
+  timeRecords.value[id] = currentRecord;
   activeRecord = "";
 
   formTitle.value = defaultTitle;
-
 }
 
 function selectRecord(key: string) {
-
   activeRecord = key;
 
   (function setRecordToForm(timeRecord: any) {
@@ -59,7 +56,6 @@ function selectRecord(key: string) {
 
   formTitle.value = editTitle;
 }
-
 </script>
 
 <template>
@@ -78,22 +74,36 @@ function selectRecord(key: string) {
     </select>
 
     <label for="current-day">On which day:</label>
-    <input type="date" id="current-day" name="timekeeper-day" v-model="entryDate" />
+    <input
+      type="date"
+      id="current-day"
+      name="timekeeper-day"
+      v-model="entryDate"
+    />
 
     <label for="start-time">When did you start?</label>
-    <input type="time" id="start-time" name="timekeeper-start" v-model="beginTime" />
+    <input
+      type="time"
+      id="start-time"
+      name="timekeeper-start"
+      v-model="beginTime"
+    />
 
     <label for="end-time">When did you finish?</label>
     <input type="time" id="end-time" name="timekeeper-end" v-model="endTime" />
 
     <label for="notes">Tell me more about your activity:</label>
-    <textarea id="notes" name="notes-text" rows="10"
+    <textarea
+      id="notes"
+      name="notes-text"
+      rows="10"
       placeholder="Learned something new, did some exercise, read a chapter in a new book, cooked my favourite meal..."
-      maxlength="1000" v-model="activityDescription"></textarea>
+      maxlength="1000"
+      v-model="activityDescription"
+    ></textarea>
   </div>
 
   <TimeRecords :timeRecords="timeRecords" @select-record="selectRecord" />
-
 </template>
 
 <style scoped>
